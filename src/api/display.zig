@@ -150,12 +150,13 @@ pub const Element = union(enum) {
             .string => |text| text,
             else => return error.UnexpectedToken,
         };
-        inline for (@typeInfo(Element).@"union".fields) |field| {
-            if (std.mem.eql(u8, name, field.name)) {
+        const info = @typeInfo(Element).@"union";
+        inline for (info.field_names, info.field_types) |field_name, field_type| {
+            if (std.mem.eql(u8, name, field_name)) {
                 return @unionInit(
                     Element,
-                    field.name,
-                    try std.json.parseFromValueLeaky(field.type, allocator, source, options),
+                    field_name,
+                    try std.json.parseFromValueLeaky(field_type, allocator, source, options),
                 );
             }
         }

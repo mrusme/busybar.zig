@@ -2,7 +2,7 @@
 
 [![SEGV LICENSE](https://img.shields.io/static/v1?label=SEGV%20LICENSE&message=1.1&labelColor=0060A8&color=ffffff)](https://xn--gckvb8fzb.com/segv/)
 
-A Zig 0.16 client library for the Flipper BUSY Bar.
+A Zig 0.17 client library for the Flipper BUSY Bar.
 
 [<img src="https://xn--gckvb8fzb.com/images/chatroom.png" width="275">](https://xn--gckvb8fzb.com/contact/)
 
@@ -53,7 +53,7 @@ unreachable, and 2 for a usage error.
 ### Library
 
 ```sh
-zig fetch --save https://github.com/mrusme/busybar.zig/archive/refs/tags/v0.1.0.tar.gz
+zig fetch --save https://github.com/mrusme/busybar.zig/archive/refs/tags/v0.2.0.tar.gz
 ```
 
 ```zig

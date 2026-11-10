@@ -52,7 +52,7 @@ pub fn parse(allocator: std.mem.Allocator, argv: []const [:0]const u8) Error!Arg
         }
 
         const stripped = std.mem.trimStart(u8, arg, "-");
-        if (std.mem.indexOfScalar(u8, stripped, '=')) |split| {
+        if (std.mem.findScalar(u8, stripped, '=')) |split| {
             try self.options.append(allocator, .{
                 .name = stripped[0..split],
                 .value = stripped[split + 1 ..],

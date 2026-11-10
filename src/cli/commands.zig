@@ -418,7 +418,7 @@ fn assets(ctx: Context, command: ?[]const u8) !void {
     const source = try ctx.require(2, "local-file");
     const body = try ctx.readInput(source);
     defer ctx.allocator.free(body);
-    const target = ctx.args.get("name") orelse std.fs.path.basename(source);
+    const target = ctx.args.get("name") orelse std.Io.Dir.path.basename(source);
     try ctx.client.assets().upload(app, target, body);
     try ctx.out.ok("uploaded {d} bytes as {s}", .{ body.len, target });
 }

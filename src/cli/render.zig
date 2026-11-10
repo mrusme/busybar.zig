@@ -56,19 +56,19 @@ pub fn humanBytes(buffer: []u8, amount: u64) []const u8 {
     var size: f64 = @floatFromInt(amount);
     var unit: usize = 0;
     while (size >= 1024 and unit + 1 < units.len) : (unit += 1) size /= 1024;
-    if (unit == 0) return std.fmt.bufPrint(buffer, "{d} B", .{amount}) catch "?";
-    return std.fmt.bufPrint(buffer, "{d:.1} {s}", .{ size, units[unit] }) catch "?";
+    if (unit == 0) return std.mem.print(buffer, "{d} B", .{amount}) catch "?";
+    return std.mem.print(buffer, "{d:.1} {s}", .{ size, units[unit] }) catch "?";
 }
 
 pub fn duration(buffer: []u8, milliseconds: i64) []const u8 {
-    if (milliseconds < 0) return std.fmt.bufPrint(buffer, "-", .{}) catch "?";
+    if (milliseconds < 0) return std.mem.print(buffer, "-", .{}) catch "?";
     const total = @divTrunc(milliseconds, 1000);
     const hours = @divTrunc(total, 3600);
     const minutes = @divTrunc(@mod(total, 3600), 60);
     const seconds = @mod(total, 60);
-    if (hours > 0) return std.fmt.bufPrint(buffer, "{d}h {d}m {d}s", .{ hours, minutes, seconds }) catch "?";
-    if (minutes > 0) return std.fmt.bufPrint(buffer, "{d}m {d}s", .{ minutes, seconds }) catch "?";
-    return std.fmt.bufPrint(buffer, "{d}s", .{seconds}) catch "?";
+    if (hours > 0) return std.mem.print(buffer, "{d}h {d}m {d}s", .{ hours, minutes, seconds }) catch "?";
+    if (minutes > 0) return std.mem.print(buffer, "{d}m {d}s", .{ minutes, seconds }) catch "?";
+    return std.mem.print(buffer, "{d}s", .{seconds}) catch "?";
 }
 
 test humanBytes {

@@ -22,8 +22,8 @@ pub const wifi = @import("api/wifi.zig");
 
 test {
     std.testing.refAllDecls(@This());
-    inline for (comptime std.meta.declarations(@This())) |decl| {
-        const namespace = @field(@This(), decl.name);
+    inline for (comptime std.meta.declarations(@This())) |name| {
+        const namespace = @field(@This(), name);
         if (@TypeOf(namespace) == type and @typeInfo(namespace) == .@"struct") {
             std.testing.refAllDecls(namespace);
         }

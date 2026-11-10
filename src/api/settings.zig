@@ -59,7 +59,7 @@ pub const Api = struct {
 
     pub fn setVolume(self: Api, value: f64, silent: bool) !void {
         var buffer: [32]u8 = undefined;
-        const rendered = try std.fmt.bufPrint(&buffer, "{d}", .{value});
+        const rendered = try std.mem.print(&buffer, "{d}", .{value});
         return self.client.expectOk(.POST, "/api/audio/volume", &.{
             .{ "volume", rendered },
             .{ "silent", if (silent) "1" else "0" },

@@ -166,7 +166,7 @@ pub fn send(
         .response_writer = &body.writer,
     });
 
-    const status = @intFromEnum(result.status);
+    const status = @backingInt(result.status);
     if (status < 200 or status > 299) {
         return self.fail(status, body.written());
     }
@@ -263,7 +263,7 @@ fn parseError(self: *Client, status: u16, body: []const u8) !ApiError {
 }
 
 fn genericError(self: *Client, status: u16) !ApiError {
-    const phrase = std.http.Status.phrase(@enumFromInt(status)) orelse "unknown status";
+    const phrase = std.http.Status.phrase(@fromBackingInt(@intCast(status))) orelse "unknown status";
     return .{
         .status = status,
         .code = null,
@@ -307,7 +307,7 @@ fn normalizeAddress(allocator: std.mem.Allocator, address: []const u8) ![]u8 {
     {
         return allocator.dupe(u8, without_slash);
     }
-    return std.fmt.allocPrint(allocator, "http://{s}", .{without_slash});
+    return allocator.print("http://{s}", .{without_slash});
 }
 
 fn testClient(base_url: []u8) Client {

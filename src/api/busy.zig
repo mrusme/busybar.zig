@@ -351,7 +351,7 @@ test "profile timer settings serialize flat" {
 
     const encoded = try std.json.Stringify.valueAlloc(allocator, parsed.value, Client.json_stringify_options);
     defer allocator.free(encoded);
-    try std.testing.expect(std.mem.indexOf(u8, encoded, "\"timer_settings\":{\"type\":\"INFINITE\"}") != null);
+    try std.testing.expect(std.mem.find(u8, encoded, "\"timer_settings\":{\"type\":\"INFINITE\"}") != null);
 }
 
 test "unknown discriminator is rejected" {

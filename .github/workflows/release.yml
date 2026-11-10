@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 env:
-  ZIG_VERSION: 0.16.0
+  ZIG_VERSION: 0.17.1
 
 jobs:
   test:
@@ -172,7 +172,7 @@ jobs:
       - name: Build
         env:
           TARGET: ${{ matrix.target }}
-        run: zig build -Dtarget="$TARGET" -Dstrip -Doptimize=ReleaseSafe --prefix dist
+        run: zig build -Dtarget="$TARGET" -Dstrip -Doptimize=safe --prefix dist
       - name: Package
         env:
           TARGET: ${{ matrix.target }}
